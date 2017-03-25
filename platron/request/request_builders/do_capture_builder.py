@@ -14,8 +14,9 @@ class DoCaptureBuilder(RequestBuilder):
         if type(long_record) != LongRecord:
             raise SdkException('Only long record object expected')
         
-        for param_name in long_record.keys():
-            setattr(self, param_name, long_record.get(param_name))
+        long_record_params = long_record.get_params()
+        for param_name in long_record_params.keys():
+            setattr(self, param_name, long_record_params.get(param_name))
             
         return self
     
