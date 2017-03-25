@@ -1,5 +1,5 @@
 import datetime
-from .request_builder import RequestBuilder
+from platron.request.request_builders.request_builder import RequestBuilder
 
 class GetRegistryBuilder(RequestBuilder):
     '''

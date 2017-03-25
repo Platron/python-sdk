@@ -1,9 +1,10 @@
 import requests
-from .client import Client
+
+from platron.request.clients.platron_client import PlatronClient
 from platron.exception import SdkException
 import xml.etree.ElementTree
 
-class PostClient(Client):
+class PostClient(PlatronClient):
     '''
     Send request to platron by post
     '''
