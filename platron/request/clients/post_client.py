@@ -3,7 +3,7 @@ import random
 
 from platron.request.clients.platron_client import PlatronClient
 from platron.sig_helper import SigHelper
-from platron.exception import SdkException
+from platron.sdk_exception import SdkException
 import xml.etree.ElementTree
 
 class PostClient(PlatronClient):
