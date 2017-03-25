@@ -54,10 +54,10 @@ class SigHelper(object):
         params.pop('pg_sig', 'deleted')
         list_to_sort = list(params.keys());
         list_to_sort.sort()
-        str_to_sig = script_name
+        str_to_sig = script_name + ';'
         
         for key in list_to_sort:
-            str_to_sig += str(params.get(str(key)))
+            str_to_sig += str(params.get(str(key))) + ';'
             
         str_to_sig += self.secret_key
         return str_to_sig
