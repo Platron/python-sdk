@@ -6,11 +6,10 @@ class SigHelper(object):
     Class to help make and check sign
     '''
     
-    flat_xml_array = {}
-    flat_array = {}
-    
     def __init__(self, secret_key):
         self.secret_key = secret_key
+        self.flat_array = {}
+        self.flat_xml_array = {}
         
     def __make_flat_params_xml(self, xml_str, parent_name = ''):
         if parent_name == '':
@@ -20,17 +19,20 @@ class SigHelper(object):
             
         i = 0
         for child in root:
-            if child.text == 'pg_sig':
+            if child.tag == 'pg_sig':
                 continue
             
             name = parent_name + child.tag + str(i)
             
-            if child.getchildren() == []:
+            if child.getchildren() != []:
                 self.__make_flat_params_xml(child, name)
                 continue
             
-            self.flat_xml_array.update({name : child.text})
-            
+            if child.text == None:
+                self.flat_xml_array.update({name : ''})
+            else:
+                self.flat_xml_array.update({name : child.text})
+          
         return self.flat_xml_array
         
     def __make_flat_params_array(self, params, parent_name = ''):
@@ -46,7 +48,7 @@ class SigHelper(object):
                 continue
             
             self.flat_array.update({key : params.get(str(key))})
-            
+        
         return self.flat_array            
     
     def __make_sig_str(self, script_name, params):
@@ -69,7 +71,7 @@ class SigHelper(object):
         Returns:
             Signature string
         """
-        flat_params = self.__make_flat_params_array(params)
+        flat_params = self.__make_flat_params_array(params)        
         return hashlib.md5(self.__make_sig_str(script_name, flat_params).encode('utf-8')).hexdigest()
                         
     def check(self, signature, script_name, params):
@@ -88,7 +90,7 @@ class SigHelper(object):
         Args:
             signature (str): signature in request to check
             script_name (str): requested script name
-            xml (string): xml string
+            xml (str): xml string
         Returns:
             Boolean
         """
@@ -98,7 +100,7 @@ class SigHelper(object):
         """ Make signature for xml string
         Args:
             script_name (str): requested script name
-            xml (string): xml string
+            xml (str): xml string
         Returns:
             string
         """

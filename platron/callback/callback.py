@@ -32,8 +32,10 @@ class Callback(object):
         
         signature_element = SubElement(response_element, 'pg_sig')
         signature_element.text = signature
+
+        response = tostring(response_element, encoding='utf8', method='xml').decode("utf-8")
         
-        return tostring(response_element)
+        return response
     
     def validate_sig(self, params):
         """ Validete signature in callback request
