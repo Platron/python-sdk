@@ -6,6 +6,10 @@ class CancelBuilder(RequestBuilder):
     '''
 
     def __init__(self, payment):
+        """
+        Args:
+            payment (string): platron payment id
+        """
         self.pg_payment_id = payment
         
     def get_url(self):

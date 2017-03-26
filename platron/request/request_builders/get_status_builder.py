@@ -6,6 +6,11 @@ class GetStatusBuilder(RequestBuilder):
     '''
 
     def __init__(self, payment = None, order = None):
+        """Could be payment or order. But one parametr is required
+        Args:
+            payment (string): platron payment id
+            order (string): merchant order id
+        """
         if payment == None:
             self.pg_order_id = order
         else:

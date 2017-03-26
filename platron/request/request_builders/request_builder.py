@@ -1,4 +1,5 @@
 import abc
+from platron.sdk_exception import SdkException
 
 class RequestBuilder(metaclass=abc.ABCMeta):
     '''
@@ -8,9 +9,13 @@ class RequestBuilder(metaclass=abc.ABCMeta):
     PLATRON_URL = 'https://www.platron.ru/'
 
     def get_url(self):
-        pass
+        raise SdkException('Not implemented get_url method')
     
     def get_params(self):
+        """Get public not callable params to send request
+        Returns:
+            Dict
+        """
         params = [arg for arg in dir(self) if not arg.startswith('_')]
         callable_params = [arg for arg in dir(self) if callable(getattr(self, arg)) and not arg.startswith('_')]
         

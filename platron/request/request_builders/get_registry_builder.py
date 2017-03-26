@@ -6,6 +6,10 @@ class GetRegistryBuilder(RequestBuilder):
     '''
     
     def __init__(self, date):
+        """
+        Args:
+            date (string): date
+        """
         self.pg_date = date
 
     def get_url(self):

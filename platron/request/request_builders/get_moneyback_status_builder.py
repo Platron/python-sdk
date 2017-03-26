@@ -5,8 +5,11 @@ class GetMoneybackStatusBuilder(RequestBuilder):
     Get moneyback status API request
     '''
 
-
     def __init__(self, moneyback):
+        """
+        Args:
+            moneyback (string): platron moneyback id
+        """
         self.pg_moneyback_id = moneyback
         
     def get_url(self):

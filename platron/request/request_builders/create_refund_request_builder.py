@@ -6,6 +6,12 @@ class CreateRefundRequest(RequestBuilder):
     '''
 
     def __init__(self, payment, amount, comment):
+        """
+        Args:
+            payment (string): platron payment id
+            amount (string): amount to refund requst
+            comment (string): reason of refund
+        """
         self.pg_payment_id = payment
         self.pg_refund_amount = amount
         self.pg_comment = comment

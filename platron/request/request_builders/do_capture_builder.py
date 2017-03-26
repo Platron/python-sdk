@@ -8,17 +8,23 @@ class DoCaptureBuilder(RequestBuilder):
     '''
 
     def __init__(self, payment):
+        """
+        Args:
+            payment (string): platron payment id
+        """
         self.pg_payment_id = payment
        
     def add_long_record(self, long_record):
+        """Add lond record to capture
+        Args:
+            long_record (LongRecord): long record params
+        """
         if type(long_record) != LongRecord:
             raise SdkException('Only long record object expected')
         
         long_record_params = long_record.get_params()
         for param_name in long_record_params.keys():
             setattr(self, param_name, long_record_params.get(param_name))
-            
-        return self
     
     def get_url(self):
         return self.PLATRON_URL + 'do_capture.php' 

@@ -1,5 +1,6 @@
 from platron.sig_helper import SigHelper
 from platron.sdk_exception import SdkException
+from xml.etree.ElementTree import Element, SubElement, tostring
 
 class Callback(object):
     '''
@@ -16,7 +17,23 @@ class Callback(object):
         self.sig_helper = SigHelper(secret_key)
         
     def __response(self, salt, status, description):
-        pass
+        response_element = Element('response')
+        
+        status_element = SubElement(response_element, 'pg_status')
+        status_element.text = status
+        
+        salt_element = SubElement(response_element, 'pg_salt')
+        salt_element.text = salt
+        
+        description_element = SubElement(response_element, 'pg_description')
+        description_element.text = description
+        
+        signature = self.sig_helper.make_xml(self.script_name, tostring(response_element))
+        
+        signature_element = SubElement(response_element, 'pg_sig')
+        signature_element.text = signature
+        
+        return tostring(response_element)
     
     def validate_sig(self, params):
         """ Validete signature in callback request
