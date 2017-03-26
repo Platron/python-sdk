@@ -13,7 +13,6 @@ class SigHelper(object):
         self.secret_key = secret_key
         
     def __make_flat_params_xml(self, xml_str, parent_name = ''):
-        
         if parent_name == '':
             root = xml.etree.ElementTree.fromstring(xml_str)
         else:
@@ -63,15 +62,45 @@ class SigHelper(object):
         return str_to_sig
     
     def make(self, script_name, params):
+        """ Make signature by params and script_name
+        Args:
+            script_name (str): requested script name
+            params (dict): params to request
+        Returns:
+            Signature string
+        """
         flat_params = self.__make_flat_params_array(params)
         return hashlib.md5(self.__make_sig_str(script_name, flat_params).encode('utf-8')).hexdigest()
                         
     def check(self, signature, script_name, params):
+        """ Check signature by params and script_name
+        Args:
+            signature (str): signature in request to check
+            script_name (str): requested script name
+            params (dict): params to request
+        Returns:
+            Boolean
+        """
         return signature == self.make(script_name, params)
     
     def check_xml(self, signature, script_name, xml):
+        """ Check signature by params and script_name in xml request string
+        Args:
+            signature (str): signature in request to check
+            script_name (str): requested script name
+            xml (string): xml string
+        Returns:
+            Boolean
+        """
         return signature == self.make_xml(script_name, xml)
     
     def make_xml(self, script_name, xml):
+        """ Make signature for xml string
+        Args:
+            script_name (str): requested script name
+            xml (string): xml string
+        Returns:
+            string
+        """
         flat_params = self.__make_flat_params_xml(xml)
         return self.make(script_name, flat_params)

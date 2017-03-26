@@ -7,6 +7,18 @@ class TripLeg(DataObject):
     '''
 
     def __init__(self, tripleg_number, date, carrier, class_transport, dest_from, dest_to, stop_over, basis_code, flight_number):
+        """
+        Args:
+            tripleg_number (string): flight number
+            date (string): date of tripleg
+            carrier (string): carrier code
+            class_transport (string): transport class
+            dest_from (string): aiport from code
+            dest_to (string): aiport to code
+            stop_over (string): can stop (O|X)
+            basis_code (string): tariff code
+            flight_number (string): fligth number
+        """       
         if int(tripleg_number) <= 0 or int(tripleg_number) > 4:
             raise SdkException('Only 4 tripleg could be send')
             

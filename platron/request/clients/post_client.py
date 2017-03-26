@@ -11,12 +11,22 @@ class PostClient(PlatronClient):
     Send request to platron by post
     '''
 
-
     def __init__(self, merchant, secret_key):
+        """
+        Args:
+            merchant (string): merchant id from https://www.platron.ru/admin/merchants.php
+            secret_key (string): merchant secret key from https://www.platron.ru/admin/merchants.php
+        """
         self.merchant = merchant
         self.secret_key = secret_key
     
     def request(self, request_builder):
+        """Send post request and check errors
+        Args:
+            request_builder (RequestBuilder): instance of RequestBuilder
+        Returns:
+            String
+        """
         try :
             params_to_request = request_builder.get_params()
             params_to_request.update({'pg_merchant_id' : self.merchant})

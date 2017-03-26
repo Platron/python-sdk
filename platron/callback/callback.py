@@ -7,6 +7,11 @@ class Callback(object):
     '''
 
     def __init__(self, script_name, secret_key):
+        """
+        Args:
+            script_name (string): requested string
+            secret_key (string): merchant secret key from https://www.platron.ru/admin/merchants.php
+        """
         self.script_name = script_name
         self.sig_helper = SigHelper(secret_key)
         
@@ -14,6 +19,12 @@ class Callback(object):
         pass
     
     def validate_sig(self, params):
+        """ Validete signature in callback request
+        Args:
+            params (dict): xml string
+        Returns:
+            Boolean
+        """
         try :
             pg_sig = params.get('pg_sig')
         except Exception:
@@ -22,6 +33,13 @@ class Callback(object):
         return self.sig_helper.check(pg_sig, self.script_name, params)
     
     def response_error(self, params, error):
+        """ Get xml with error to responde
+        Args:
+            params (dict): xml string
+            error (str): error description
+        Returns:
+            Xml string
+        """
         try :
             pg_salt = params.get('pg_salt')
         except Exception:
@@ -30,6 +48,12 @@ class Callback(object):
         return self.__response(pg_salt, 'error', error)
     
     def response_ok(self, params):
+        """ Get xml with ok to responde
+        Args:
+            params (dict): xml string
+        Returns:
+            Xml string
+        """
         try :
             pg_salt = params.get('pg_salt')
         except Exception:
@@ -38,6 +62,13 @@ class Callback(object):
         return self.__response(pg_salt, 'ok', 'ok')
     
     def response_rejected(self, params, description):
+        """ Get xml with rejected to responde
+        Args:
+            params (dict): xml string
+            error (str): rejected description
+        Returns:
+            Xml string
+        """
         try :
             pg_salt = params.get('pg_salt')
         except Exception:
@@ -46,6 +77,12 @@ class Callback(object):
         return self.__response(pg_salt, 'rejected', description)
     
     def can_reject(self, params):
+        """ Can reject payment or not
+        Args:
+            params (dict): xml string
+        Returns:
+            Boolean
+        """
         try :
             can_reject = params.get('pg_can_reject')
         except Exception:
