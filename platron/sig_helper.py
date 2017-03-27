@@ -16,13 +16,17 @@ class SigHelper(object):
             root = xml.etree.ElementTree.fromstring(xml_str)
         else:
             root = xml_str
-            
+
         i = 0
         for child in root:
+            
+            i += 1
             if child.tag == 'pg_sig':
                 continue
             
-            name = parent_name + child.tag + str(i)
+            name = parent_name + child.tag + "{:03d}".format(i)
+            if self.flat_xml_array.get(name) != None:
+                name = name + '_doubled'
             
             if child.getchildren() != []:
                 self.__make_flat_params_xml(child, name)
@@ -38,10 +42,12 @@ class SigHelper(object):
     def __make_flat_params_array(self, params, parent_name = ''):
         i = 0
         for key in params:
+            
+            i += 1
             if key == 'pg_sig':
                 continue
             
-            name = parent_name + str(key) + str(i)
+            name = parent_name + str(key) + "{:03d}".format(i)
             
             if type(params.get(str(key))) == dict:
                 self.__make_flat_params_array(params, name)
@@ -71,7 +77,7 @@ class SigHelper(object):
         Returns:
             Signature string
         """
-        flat_params = self.__make_flat_params_array(params)        
+        flat_params = self.__make_flat_params_array(params)
         return hashlib.md5(self.__make_sig_str(script_name, flat_params).encode('utf-8')).hexdigest()
                         
     def check(self, signature, script_name, params):

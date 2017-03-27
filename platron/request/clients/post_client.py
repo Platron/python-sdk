@@ -44,7 +44,7 @@ class PostClient(PlatronClient):
             signature = root.find('pg_sig').text
         except Exception:
             raise SdkException('Cant send request or parse response')
-
+        
         sig_helper = SigHelper(self.secret_key)
         if not sig_helper.check_xml(signature, script_name, response.text):
             raise SdkException('Wrong signature in response')
