@@ -86,7 +86,7 @@ class MakeRecurringBuilder(RequestBuilder):
             self
         """
         for param_name in params.keys():
-            if param_name.find('pg_'):
+            if param_name.find('pg_') != -1:
                 raise  SdkException('Only params without pg_')
             
             setattr(self, param_name, params.get(param_name))

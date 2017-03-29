@@ -7,3 +7,4 @@ from .get_moneyback_status_buider_test import GetMoneybackStatusBuiderTest
 from .get_registry_builder_test import GetRegistryBuiderTest
 from .get_status_builder_test import GetStatusBuilderTest
 from .ps_list_builder_test import PsListBuiderTest
+from .make_recurring_buider_test import MakeRecurringBuiderTest
