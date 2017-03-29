@@ -21,4 +21,4 @@ class TripLegTest(unittest.TestCase):
         self.assertEquals('6062', parameters.get('pg_tripleg_1_flight_number'))
         
         with self.assertRaises(SdkException):
-            data_object = TripLeg('5', '2017-01-01', 'SU', 'E', 'KRR', 'VKO', 'X', 'NVOR', '6062')
+            TripLeg('5', '2017-01-01', 'SU', 'E', 'KRR', 'VKO', 'X', 'NVOR', '6062')

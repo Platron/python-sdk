@@ -7,6 +7,6 @@ from .get_moneyback_status_builder import GetMoneybackStatusBuilder
 from .get_status_builder import GetStatusBuilder
 from .make_recurring_builder import MakeRecurringBuilder
 from .ps_list_builder import PsListBuilder
-from .create_refund_request_builder import CreateRefundRequest
+from .create_refund_request_builder import CreateRefundRequestBuider
 from .revoke_builder import RevokeBuilder
 from .moneyback_system_list_builder import MoneybackSystemListBuilder

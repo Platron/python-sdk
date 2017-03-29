@@ -1,6 +1,6 @@
 from platron.request.request_builders.request_builder import RequestBuilder
 
-class CreateRefundRequest(RequestBuilder):
+class CreateRefundRequestBuider(RequestBuilder):
     '''
     Create refund request API 
     '''
