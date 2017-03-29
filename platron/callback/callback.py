@@ -107,4 +107,8 @@ class Callback(object):
         except Exception:
             return 0
         
-        return can_reject
+        if can_reject == '1':       
+            return True
+        else:
+            return False
+        
