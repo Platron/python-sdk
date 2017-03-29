@@ -144,7 +144,7 @@ class InitPaymentBuilder(RequestBuilder):
         self.pg_result_url = url
         return self
     
-    def refund_url(self, url):
+    def add_refund_url(self, url):
         """Add refund url to transaction
         Args:
             url (string): Refund url
@@ -261,7 +261,7 @@ class InitPaymentBuilder(RequestBuilder):
         Returns:
             self
         """
-        self.pg_user_email = user_email
+        self.pg_user_contact_email = user_email
         return self
     
     def add_user_ip(self, user_ip):
@@ -282,7 +282,22 @@ class InitPaymentBuilder(RequestBuilder):
             self
         """
         for param_name in params.keys():
-            if param_name.find('pg_'):
+            if param_name.find('pg_') != -1:
+                raise  SdkException('Only params without pg_')
+            
+            setattr(self, param_name, params.get(param_name))
+        
+        return self
+    
+    def add_ps_additional_parameters(self, params):
+        """Add ps additional params
+        Args:
+            params (dict): ps additional params with pg_ names
+        Returns:
+            self
+        """
+        for param_name in params.keys():
+            if param_name.find('pg_') == -1:
                 raise  SdkException('Only params without pg_')
             
             setattr(self, param_name, params.get(param_name))
