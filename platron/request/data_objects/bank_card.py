@@ -20,4 +20,4 @@ class BankCard(DataObject):
         self.pg_exp_year = exp_year
         self.pg_exp_month = exp_month
         self.pg_cvv2 = cvv
-        self.user_ip = user_ip
+        self.pg_user_ip = user_ip

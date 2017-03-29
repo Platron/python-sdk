@@ -9,7 +9,6 @@ class DataObject(metaclass=abc.ABCMeta):
         params = [arg for arg in dir(self) if not arg.startswith('_')]
         callable_params = [arg for arg in dir(self) if callable(getattr(self, arg)) and not arg.startswith('_')]
         
-        params.remove('PLATRON_URL')
         for callable_param in callable_params:
             params.remove(callable_param)
             
