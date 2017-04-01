@@ -8,6 +8,6 @@ class GetMoneybackStatusBuiderTest(unittest.TestCase):
 
     def test_get_params(self):
         builder = GetMoneybackStatusBuilder('3344')
-        parameters = builder.get_parameters()
+        parameters = builder.get_params()
         
         self.assertEqual('3344', parameters.get('pg_moneyback_id'))     
