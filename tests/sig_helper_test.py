@@ -15,7 +15,7 @@ class SigHelperTest(unittest.TestCase):
         
     def test_check(self):      
         self.assertTrue(self.sig_helper.check('27a5edfcb35e2fa44c9adef6994af3f0', 'payment.php', {'test' : 'test1', 'test2' : 'test3'}))
-        self.assertTrue(self.sig_helper.check('937370635c8b76c5d79e6a7bcc6eafa0', 'payment.php', {'foo' : {'1', '2'}}))
+        self.assertTrue(self.sig_helper.check('502ef429a8aa62af2b7787bfa43efba2', 'payment.php', {'foo' : {'1', '2'}}))
         
     def test_make_xml(self):
         response_element = Element('response')

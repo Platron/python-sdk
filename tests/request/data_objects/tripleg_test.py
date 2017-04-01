@@ -11,14 +11,14 @@ class TripLegTest(unittest.TestCase):
         data_object = TripLeg('1', '2017-01-01', 'SU', 'E', 'KRR', 'VKO', 'X', 'NVOR', '6062')
         parameters = data_object.get_params()
         
-        self.assertEquals('2017-01-01', parameters.get('pg_tripleg_1_date'))
-        self.assertEquals('SU', parameters.get('pg_tripleg_1_carrier'))
-        self.assertEquals('E', parameters.get('pg_tripleg_1_class'))
-        self.assertEquals('KRR', parameters.get('pg_tripleg_1_destination_from'))
-        self.assertEquals('VKO', parameters.get('pg_tripleg_1_destination_to'))
-        self.assertEquals('X', parameters.get('pg_tripleg_1_stopover'))
-        self.assertEquals('NVOR', parameters.get('pg_tripleg_1_fare_basis_code'))
-        self.assertEquals('6062', parameters.get('pg_tripleg_1_flight_number'))
+        self.assertEqual('2017-01-01', parameters.get('pg_tripleg_1_date'))
+        self.assertEqual('SU', parameters.get('pg_tripleg_1_carrier'))
+        self.assertEqual('E', parameters.get('pg_tripleg_1_class'))
+        self.assertEqual('KRR', parameters.get('pg_tripleg_1_destination_from'))
+        self.assertEqual('VKO', parameters.get('pg_tripleg_1_destination_to'))
+        self.assertEqual('X', parameters.get('pg_tripleg_1_stopover'))
+        self.assertEqual('NVOR', parameters.get('pg_tripleg_1_fare_basis_code'))
+        self.assertEqual('6062', parameters.get('pg_tripleg_1_flight_number'))
         
         with self.assertRaises(SdkException):
             TripLeg('5', '2017-01-01', 'SU', 'E', 'KRR', 'VKO', 'X', 'NVOR', '6062')
