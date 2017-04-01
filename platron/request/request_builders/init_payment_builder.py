@@ -27,7 +27,7 @@ class InitPaymentBuilder(RequestBuilder):
         Returns:
             self
         """
-        if type(bankcard) != BankCard:
+        if not isinstance(bankcard, BankCard):
             raise SdkException('Only long record object expected')
         
         bank_card_params = bankcard.get_params()
@@ -43,7 +43,7 @@ class InitPaymentBuilder(RequestBuilder):
         Returns:
             self
         """
-        if type(avia_gds) != AviaGds:
+        if not isinstance(avia_gds, AviaGds):
             raise SdkException('Only long record object expected')
         
         avia_gds_params = avia_gds.get_params()

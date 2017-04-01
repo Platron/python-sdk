@@ -40,9 +40,9 @@ class SigHelper(object):
         return self.flat_xml_array
         
     def __make_flat_params_array(self, params, parent_name = ''):
-        i = 0
+        i = 0       
         for key in params:
-            
+                        
             i += 1
             if key == 'pg_sig':
                 continue
@@ -50,7 +50,7 @@ class SigHelper(object):
             name = parent_name + str(key) + "{:03d}".format(i)
             
             if type(params.get(str(key))) == dict:
-                self.__make_flat_params_array(params, name)
+                self.__make_flat_params_array(params.get(str(key)), name)
                 continue
             
             self.flat_array.update({key : params.get(str(key))})

@@ -45,10 +45,11 @@ class LongRecord(DataObject):
         Returns:
             self
         """
-        if type(tripleg) != TripLeg:
+        if not isinstance(tripleg, TripLeg):
             raise SdkException('Only long record object expected')
         
-        for param_name in tripleg.keys():
-            setattr(self, param_name, tripleg.get(param_name))
+        params = tripleg.get_params()
+        for param_name in params.keys():
+            setattr(self, param_name, params.get(param_name))
             
         return self

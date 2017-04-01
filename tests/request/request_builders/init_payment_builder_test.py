@@ -1,6 +1,10 @@
 import unittest
+from platron.request.data_objects.avia_gds import AviaGds
+from platron.request.data_objects.bank_card import BankCard
 from platron.request.request_builders.init_payment_builder import InitPaymentBuilder
 from platron.sdk_exception import SdkException
+from unittest.mock import Mock
+from unittest.mock import MagicMock
 
 class InitPaymentBuiderTest(unittest.TestCase):
     '''
@@ -34,6 +38,15 @@ class InitPaymentBuiderTest(unittest.TestCase):
         builder.add_user_ip('62.213.64.221')
         builder.add_user_phone('79268750000')
         
+        bankcardStub = Mock(spec=BankCard)
+        bankcardStub.get_params = MagicMock(return_value={'bank_card_test' : 'bank_card_test'})
+        
+        aviaGdsStub = Mock(spec=AviaGds)
+        aviaGdsStub.get_params = MagicMock(return_value={'gds_test' : 'gds_test'})
+        
+        builder.add_bankcard(bankcardStub)
+        builder.add_gds(aviaGdsStub)
+        
         parameters = builder.get_params()
         
         self.assertEqual('www.site.ru/capture.php', parameters.get('pg_capture_url'))
@@ -60,6 +73,9 @@ class InitPaymentBuiderTest(unittest.TestCase):
         self.assertEqual('test@test.ru', parameters.get('pg_user_contact_email'))
         self.assertEqual('62.213.64.221', parameters.get('pg_user_ip'))
         self.assertEqual('79268750000', parameters.get('pg_user_phone'))
+        
+        self.assertEqual('bank_card_test', parameters.get('bank_card_test'))
+        self.assertEqual('gds_test', parameters.get('gds_test'))
 
         with self.assertRaises(SdkException):
             builder.add_merchant_params({'pg_wrong_merchant_param' : 'test'})
