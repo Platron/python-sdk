@@ -2,11 +2,21 @@ Platron Python SDK
 ===============
 ## Установка через pip
 
-<pre><code>$ pip install gocardless_pro</pre></code>
+<pre><code>$ pip install platron_sdk</pre></code>
 
 ## Тесты
 
-TODO. Проект тестировался под версии XXX командой
+Для запуска тестов нужно выполнить
+
+<pre><code>$ pip install -r requirements-dev.txt</pre></code>
+
+Для выполнения тестов на текущей версии python
+
+<pre><code>$ pytest</pre></code>
+
+Для выполнения тестов на разных версия проекта
+
+<pre><code>$ tox</pre></code>
 
 ## Примеры использования
 
