@@ -1,3 +1,5 @@
 .metadata/
 *.egg-info/
 .cache/
+.pydevproject
+.project
