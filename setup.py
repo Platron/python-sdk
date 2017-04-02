@@ -1,8 +1,5 @@
 import codecs
 from setuptools import setup, find_packages
-
-with codecs.open('README.md', 'r', 'utf-8') as file:
-    long_description = file.read()
     
 setup(
     name = 'platron',
@@ -12,7 +9,6 @@ setup(
     author = 'Platron',
     author_email = 'it@platron.ru',
     description = 'A client library for the Platron API',
-    long_description = long_description,
     keywords = 'platron payment api',
     url = 'https://github.com/Platron/python-sdk',
 )
