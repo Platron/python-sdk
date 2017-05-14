@@ -73,7 +73,7 @@ except SdkException as msg:
     print(msg)
 </pre></code>
 
-### 4. Обработка запроса от Platron
+### 4. Обработка запроса от Platron (check)
 
 <pre><code>
 from platron.callback import Callback
