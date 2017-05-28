@@ -4,6 +4,7 @@ import random
 from platron.request.clients.platron_client import PlatronClient
 from platron.sig_helper import SigHelper
 from platron.sdk_exception import SdkException
+from platron.dict_to_xml import DictToXml
 from xml.etree.ElementTree import Element, SubElement, tostring, fromstring
 
 class PostClient(PlatronClient):
@@ -38,7 +39,8 @@ class PostClient(PlatronClient):
             script_name = parsed_list.__getitem__(parsed_list.__len__() - 1)
             
             params_to_request.update({'pg_sig' : sig_helper.make(script_name, params_to_request)})
-            response = requests.post(request_builder.get_url(), {'pg_xml' : self.__make_xml_request_from_params(params_to_request)})
+            xml_to_request = DictToXml({'request' : params_to_request})
+            response = requests.post(request_builder.get_url(), {'pg_xml' : xml_to_request.display})
                                 
             root = fromstring(response.text)
             signature = root.find('pg_sig').text
@@ -59,14 +61,3 @@ class PostClient(PlatronClient):
             raise SdkException('Error in response ' + pg_error_description + ' code ' + pg_error_code)
         
         return response.text
-    
-    def __make_xml_request_from_params(self, params):
-        request_element = Element('request')
-        
-        for key in params.keys():
-            some_element = SubElement(request_element, str(key))
-            some_element.text = str(params.get(str(key)))
-   
-        request = tostring(request_element, encoding='utf8', method='xml').decode("utf-8")
-        
-        return request
