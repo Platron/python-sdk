@@ -14,6 +14,7 @@ class InitPaymentBuilder(RequestBuilder):
             amount (string): payment amount
             description (string): payment description
         """
+        self.sdk = 'pythonsdk'
         self.pg_amount = amount
         self.pg_description = description
         
