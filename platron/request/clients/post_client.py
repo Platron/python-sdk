@@ -1,10 +1,11 @@
 import requests
 import random
+import dicttoxml
 
 from platron.request.clients.platron_client import PlatronClient
 from platron.sig_helper import SigHelper
 from platron.sdk_exception import SdkException
-from platron.dict_to_xml import DictToXml
+from platron.dict_to_xml import DictToXML
 from xml.etree.ElementTree import Element, SubElement, tostring, fromstring
 
 class PostClient(PlatronClient):
@@ -39,7 +40,8 @@ class PostClient(PlatronClient):
             script_name = parsed_list.__getitem__(parsed_list.__len__() - 1)
             
             params_to_request.update({'pg_sig' : sig_helper.make(script_name, params_to_request)})
-            xml_to_request = DictToXml({'request' : params_to_request})
+            xml_to_request = dicttoxml.dicttoxml(params_to_request, True, 'request')
+            print(xml_to_request)            
             response = requests.post(request_builder.get_url(), {'pg_xml' : xml_to_request.display})
                                 
             root = fromstring(response.text)
