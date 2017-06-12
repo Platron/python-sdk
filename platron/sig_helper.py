@@ -36,7 +36,7 @@ class SigHelper(object):
                 self.flat_xml_array.update({name : ''})
             else:
                 self.flat_xml_array.update({name : child.text})
-          
+        
         return self.flat_xml_array
         
     def __make_flat_params_array(self, params, parent_name = ''):
@@ -47,8 +47,7 @@ class SigHelper(object):
             if key == 'pg_sig':
                 continue
             
-            name = parent_name + str(key) + "{:03d}".format(i)
-            
+            name = parent_name + str(key) + "{:03d}".format(i)            
             if type(params.get(str(key))) == dict:
                 self.__make_flat_params_array(params.get(str(key)), name)
                 continue

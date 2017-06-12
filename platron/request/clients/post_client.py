@@ -1,10 +1,11 @@
 import requests
 import random
+import dicttoxml
+from xml.etree.ElementTree import fromstring
 
 from platron.request.clients.platron_client import PlatronClient
 from platron.sig_helper import SigHelper
 from platron.sdk_exception import SdkException
-from xml.etree.ElementTree import Element, SubElement, tostring, fromstring
 
 class PostClient(PlatronClient):
     '''
@@ -35,20 +36,19 @@ class PostClient(PlatronClient):
             sig_helper = SigHelper(self.secret_key)
             
             parsed_list = request_builder.get_url().split('/');
-            script_name = parsed_list.__getitem__(parsed_list.__len__() - 1)
+            script_name = parsed_list.__getitem__(parsed_list.__len__() - 1)            
             
-            params_to_request.update({'pg_sig' : sig_helper.make(script_name, params_to_request)})
-            response = requests.post(request_builder.get_url(), {'pg_xml' : self.__make_xml_request_from_params(params_to_request)})
-                                
+            not_treated_xml = dicttoxml.dicttoxml(params_to_request, True, 'request', False, False, item_func=request_builder.item_function)
+            xml_to_request_no_sig = request_builder.after_xml_created(not_treated_xml.decode('utf_8'))
+            signature = sig_helper.make_xml(script_name, xml_to_request_no_sig)
+            xml_to_request = self.add_sig_to_xml(xml_to_request_no_sig, signature)
+
+            response = requests.post(request_builder.get_url(), {'pg_xml' : xml_to_request})
             root = fromstring(response.text)
             signature = root.find('pg_sig').text
         except Exception:
             raise SdkException('Cant send request or parse response')
-        
-        sig_helper = SigHelper(self.secret_key)
-        if not sig_helper.check_xml(signature, script_name, response.text):
-            raise SdkException('Wrong signature in response')
-        
+                
         for child in root:
             if child.tag == 'pg_error_description':
                 pg_error_description = child.text
@@ -57,16 +57,12 @@ class PostClient(PlatronClient):
                 
         if 'pg_error_code' in locals():
             raise SdkException('Error in response ' + pg_error_description + ' code ' + pg_error_code)
+                
+        sig_helper = SigHelper(self.secret_key)
+        if not sig_helper.check_xml(signature, script_name, response.text):
+            raise SdkException('Wrong signature in response')
         
         return response.text
     
-    def __make_xml_request_from_params(self, params):
-        request_element = Element('request')
-        
-        for key in params.keys():
-            some_element = SubElement(request_element, str(key))
-            some_element.text = str(params.get(str(key)))
-   
-        request = tostring(request_element, encoding='utf8', method='xml').decode("utf-8")
-        
-        return request
+    def add_sig_to_xml(self, xml, sig):
+        return xml.replace('</request>','<pg_sig>'+ sig +'</pg_sig></request>')

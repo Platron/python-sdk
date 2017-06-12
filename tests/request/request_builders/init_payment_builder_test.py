@@ -1,10 +1,11 @@
 import unittest
+from unittest.mock import Mock
+from unittest.mock import MagicMock
+
 from platron.request.data_objects.avia_gds import AviaGds
 from platron.request.data_objects.bank_card import BankCard
 from platron.request.request_builders.init_payment_builder import InitPaymentBuilder
 from platron.sdk_exception import SdkException
-from unittest.mock import Mock
-from unittest.mock import MagicMock
 
 class InitPaymentBuiderTest(unittest.TestCase):
     '''
