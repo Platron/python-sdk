@@ -28,3 +28,10 @@ class RequestBuilder(metaclass=abc.ABCMeta):
             params_to_request.update({param_name : getattr(self, param_name)})
             
         return params_to_request
+    
+    def item_function(self, parent):
+        ''' Как будут называться элементы, не имеющие названия - set()'''
+        return 'item'
+    
+    def after_xml_created(self, xml):
+        return xml
