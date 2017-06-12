@@ -42,7 +42,6 @@ class PostClient(PlatronClient):
             xml_to_request_no_sig = request_builder.after_xml_created(not_treated_xml.decode('utf_8'))
             signature = sig_helper.make_xml(script_name, xml_to_request_no_sig)
             xml_to_request = self.add_sig_to_xml(xml_to_request_no_sig, signature)
-            print(xml_to_request)
 
             response = requests.post(request_builder.get_url(), {'pg_xml' : xml_to_request})
             root = fromstring(response.text)
