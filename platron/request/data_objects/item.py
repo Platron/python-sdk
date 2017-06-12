@@ -39,5 +39,5 @@ class Item(DataObject):
         return self
         
     def __get_vat_variables(self):
-        return dict.fromkeys(['0','10','18','110','118'])
+        return {'0' : True,'10' : True,'18' : True,'110' : True,'118' : True}
         

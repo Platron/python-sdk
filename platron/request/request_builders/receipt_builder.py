@@ -37,7 +37,7 @@ class ReceiptBuilder(RequestBuilder):
         Args:
             item (Item): 1 item in receipt
         """
-        if type(item) != Item:
+        if not isinstance(item, Item):
             raise SdkException('Only item object expected')
 
         self.receipt_items.append(item.get_params())
