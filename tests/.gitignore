@@ -1,5 +1,1 @@
-/__pycache__/
-/callback/__pycache__/
-/request/clients/__pycache__/
-/request/data_objects/__pycache__/
-/request/request_builders/__pycache__/
+*__pycache__*
