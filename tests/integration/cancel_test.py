@@ -7,7 +7,7 @@ from platron.request.request_builders.init_payment_builder import InitPaymentBui
 
 class CancelTest(BaseIntegrationTest):
     '''
-    Интеграционный запрос статуса
+    Интеграционный запрос отмены платежа
     '''        
     def test_create_transaction_chain(self):
         client = PostClient(self.get_merchant_id(), self.get_secret_key())

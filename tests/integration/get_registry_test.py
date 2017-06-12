@@ -4,7 +4,7 @@ from platron.request.request_builders.get_registry_builder import GetRegistryBui
 
 class GetStatusTest(BaseIntegrationTest):
     '''
-    Интеграционный запрос статуса
+    Интеграционный запрос реестра платежей
     '''        
     def test_create_transaction_chain(self):
         client = PostClient(self.get_merchant_id(), self.get_secret_key())
