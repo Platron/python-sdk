@@ -2,21 +2,29 @@ Platron Python SDK
 ===============
 ## Установка через pip
 
-<pre><code>$ pip install platron_sdk</pre></code>
+```
+pip install platron_sdk
+```
 
 ## Тесты
 
 Для запуска тестов нужно выполнить
 
-<pre><code>$ pip install -r requirements-dev.txt</pre></code>
+```
+pip install -r requirements-dev.txt
+```
 
 Для выполнения тестов на текущей версии python
 
-<pre><code>$ pytest</pre></code>
+```
+pytest
+```
 
 Для выполнения тестов на разных версия проекта
 
-<pre><code>$ tox</pre></code>
+```
+tox
+```
 
 Модуль тестировался на python 2.7, 3.3, 3.4, 3.5, 3.6
 
@@ -27,7 +35,7 @@ Platron Python SDK
 
 ### 1. Создание транзакции
 
-<pre><code>
+```python
 from platron.request.request_builders.init_payment_builder import InitPaymentBuilder
 from platron.request.clients.post_client import PostClient
 from platron.sdk_exception import SdkException
@@ -40,11 +48,11 @@ try:
     print(response)
 except SdkException as msg:
     print(msg)
-</pre></code>
+```
 
 ### 2. Запрос реестра
 
-<pre><code>
+```python
 from platron.request.request_builders.get_registry_builder import GetRegistryBuilder
 from platron.request.clients.post_client import PostClient
 from platron.sdk_exception import SdkException
@@ -57,11 +65,11 @@ try:
     print(response)
 except SdkException as msg:
     print(msg)
-</pre></code>
+```
 
 ### 3. Проведение клиринга 
 
-<pre><code>
+```python
 from platron.request.request_builders.do_capture_builder import DoCaptureBuilder
 from platron.request.clients.post_client import PostClient
 from platron.sdk_exception import SdkException
@@ -74,11 +82,11 @@ try:
     print(response)
 except SdkException as msg:
     print(msg)
-</pre></code>
+```
 
 ### 4. Обработка запроса от Platron (check)
 
-<pre><code>
+```python
 from platron.callback import Callback
 from platron.sdk_exception import SdkException
 
@@ -97,6 +105,6 @@ if callback.validate_sig(params_from_platron) :
             pass
 else:
     callback.response_error(params_from_platron, 'Неправильная подпись')
-</pre></code>
+```
 
 order_available - вместо переменной метод, проверяющий доступность заказа
