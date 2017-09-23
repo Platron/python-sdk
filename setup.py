@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
     
 setup(
     name = 'platron',
-    version = '1.1.0',
-    packages = find_packages(exclude=['tests']),
+    version = '2.0.0',
+    packages = ['platron','platron.request.request_builders','platron.request.data_objects','platron.request.clients','platron.callback'],
     install_requires = ['requests>=2.6', 'six', 'dicttoxml'],
     author = 'Platron',
     author_email = 'it@platron.ru',
