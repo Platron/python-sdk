@@ -3,7 +3,7 @@ Platron Python SDK
 ## Установка через pip
 
 ```
-pip install platron_sdk
+pip install platron
 ```
 
 ## Тесты
