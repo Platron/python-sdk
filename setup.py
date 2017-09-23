@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
     
 setup(
     name = 'platron',
-    version = '1.0.0',
+    version = '1.1.0',
     packages = find_packages(exclude=['tests']),
     install_requires = ['requests>=2.6', 'six', 'dicttoxml'],
     author = 'Platron',
