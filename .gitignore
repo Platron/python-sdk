@@ -5,3 +5,4 @@
 .project
 .idea
 .pypirc
+dist/
