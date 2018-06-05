@@ -40,7 +40,7 @@ from platron.request.request_builders.init_payment_builder import InitPaymentBui
 from platron.request.clients.post_client import PostClient
 from platron.sdk_exception import SdkException
 
-client = PostClient('82', 'jkndvjknsdjkvnsjdf')
+client = PostClient('merchant_id', 'secret_key')
 request = InitPaymentBuilder('10', 'Test description')
 
 try:
@@ -57,7 +57,7 @@ from platron.request.request_builders.get_registry_builder import GetRegistryBui
 from platron.request.clients.post_client import PostClient
 from platron.sdk_exception import SdkException
 
-client = PostClient('82', 'jkndvjknsdjkvnsjdf')
+client = PostClient('merchant_id', 'secret_key')
 request = GetRegistryBuilder('2017-01-01')
 
 try:
@@ -74,7 +74,7 @@ from platron.request.request_builders.do_capture_builder import DoCaptureBuilder
 from platron.request.clients.post_client import PostClient
 from platron.sdk_exception import SdkException
 
-client = PostClient('82', 'jkndvjknsdjkvnsjdf')
+client = PostClient('merchant_id', 'secret_key')
 request = DoCaptureBuilder('3334455')
 
 try:
