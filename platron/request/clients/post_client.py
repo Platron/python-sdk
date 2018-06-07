@@ -25,6 +25,8 @@ class PostClient(PlatronClient):
         """Send post request and check errors
         Args:
             request_builder (RequestBuilder): instance of RequestBuilder
+        Exceptions:
+            SdkException
         Returns:
             String
         """
