@@ -83,7 +83,7 @@ class Callback(object):
     def response_rejected(self, params, description):
         """ Get xml with rejected to responde
         Args:
-            params (dict): xml string
+            params (dict): xml request
             error (str): rejected description
         Returns:
             Xml string
