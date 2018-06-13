@@ -77,6 +77,7 @@ class SigHelper(object):
             Signature string
         """
         flat_params = self.__make_flat_params_array(params)
+        self.flat_array = {}
         return hashlib.md5(self.__make_sig_str(script_name, flat_params).encode('utf-8')).hexdigest()
                         
     def check(self, signature, script_name, params):
@@ -110,4 +111,5 @@ class SigHelper(object):
             string
         """
         flat_params = self.__make_flat_params_xml(xml)
+        self.flat_xml_array = {}
         return self.make(script_name, flat_params)
