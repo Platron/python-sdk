@@ -14,6 +14,7 @@ class ItemTest(unittest.TestCase):
         data_object = Item('test', '100.00', '2')
         data_object.add_vat('0')
         data_object.add_amount('180.00')
+        data_object.add_type('product')
         
         params = data_object.get_params()
         
@@ -22,6 +23,7 @@ class ItemTest(unittest.TestCase):
         self.assertEqual('2', params.get('pg_quantity'))
         self.assertEqual('0', params.get('pg_vat'))
         self.assertEqual('180.00', params.get('pg_amount'))
+        self.assertEqual('product', params.get('pg_type'))
         
         with self.assertRaises(SdkException):
             data_object.add_vat('wrong_vat')
