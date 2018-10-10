@@ -31,11 +31,20 @@ class Item(DataObject):
     
     def add_amount(self, amount):
         """
-        If price * quantity != amount looks like discount
+        Add amount to receipt item
         Args:
-            vat (string): product vat from constant
+            amount (float): product amount
         """      
         self.pg_amount = amount
+        return self
+    
+    def add_type(self, item_type):
+        """
+        Add type to receipt item
+        Args:
+            item_type (string): product type
+        """      
+        self.type = item_type
         return self
         
     def __get_vat_variables(self):
