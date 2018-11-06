@@ -1,8 +1,9 @@
-.metadata/
-*.egg-info/
-.cache/
+dist
+.metadata
+.cache
 .pydevproject
 .project
 .idea
 .pypirc
-dist/
+.pytest_cache
+*.egg-info
