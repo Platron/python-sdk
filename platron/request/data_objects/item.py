@@ -65,17 +65,21 @@ class Item(DataObject):
         self.pg_agent_inn = agent_inn
         self.pg_agent_phone = agent_phone
 
-    def __get_vat_variables(self):
+    @staticmethod
+    def __get_vat_variables():
         return {'0': True, '10': True, '18': True, '110': True, '118': True}
 
-    def __get_type_variables(self):
+    @staticmethod
+    def __get_type_variables():
         return {'product': True, 'product_excise': True, 'work': True, 'service': True, 'gambling_bet': True,
                 'gambling_win': True, 'lottery_bet': True, 'lottery_win': True, 'rid': True, 'payment': True,
                 'commission': True, 'composite': True, 'other': True}
 
-    def __get_payment_type_variables(self):
+    @staticmethod
+    def __get_payment_type_variables():
         return {'full_payment': True, 'pre_payment_full': True, 'pre_payment_part': True, 'advance': True,
                 'credit_part': True, 'credit_pay': True, 'credit': True}
 
-    def __get_agent_type_variables(self):
+    @staticmethod
+    def __get_agent_type_variables():
         return {'commissionaire': True}

@@ -4,8 +4,6 @@ from platron.sdk_exception import SdkException
 
 class RecurringSetScheduleBuilder(RequestBuilder):
 
-    dates = []
-
     def __init__(self, recurring_profile, amount):
         """
         :param recurring_profile: digital recurring profile id (string)
@@ -19,12 +17,12 @@ class RecurringSetScheduleBuilder(RequestBuilder):
 
     def add_dates(self, dates):
         """
-        :param dates: Set of sting dates
+        :param dates: Set of sting dates (Set)
         """
-        if dates.len(dates) == 0:
+        if len(dates) == 0:
             raise SdkException('Use not empty Set')
 
-        self.dates.append(dates)
+        self.pg_dates = dates
 
     def add_template(self, start_date, interval, period, max_periods=None):
         """
@@ -36,18 +34,10 @@ class RecurringSetScheduleBuilder(RequestBuilder):
         if self.__get_intervals().get(interval) == None:
             raise SdkException('Wrong interval. Use from constants')
 
-        self.pg_start_date = start_date
-        self.pg_interval = interval
-        self.pg_period = period
-
+        self.pg_template = {'pg_start_date': start_date, 'pg_interval': interval, 'pg_period': period}
         if max_periods != None:
-            self.pg_max_periods = max_periods
+            self.pg_template.update({'pg_max_periods': max_periods})
 
-    def item_function(self, parent):
-        return 'pg_dates'
-
-    def after_xml_created(self, xml):
-        return xml.replace('<pg_dates>', '').replace('</pg_dates>', '')
-
-    def __get_intervals(self):
+    @staticmethod
+    def __get_intervals():
         return {'day': True, 'week': True, 'month': True}

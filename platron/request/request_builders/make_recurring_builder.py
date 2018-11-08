@@ -43,8 +43,10 @@ class MakeRecurringBuilder(RequestBuilder):
         """
         :param request_method: method to send results to merchant GET|POST|XML (string)
         """
+        if self.__get_request_method_variables().get(request_method) == None:
+            raise SdkException('Wrong request method. Use from constants')
+
         self.pg_request_method = request_method
-        return self
 
     def add_encoding(self, encoding):
         """
@@ -61,3 +63,7 @@ class MakeRecurringBuilder(RequestBuilder):
                 raise SdkException('Only params without pg_')
 
             setattr(self, param_name, params.get(param_name))
+
+    @staticmethod
+    def __get_request_method_variables():
+        return {'GET': True, 'POST': True, 'XML': True}

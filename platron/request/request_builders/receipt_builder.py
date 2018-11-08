@@ -49,10 +49,12 @@ class ReceiptBuilder(RequestBuilder):
 
         self.receipt_items.append(item.get_params())
 
-    def __get_operstion_types(self):
+    @staticmethod
+    def __get_operstion_types():
         return {'payment': True, 'refund': True, 'moneyback': True}
 
-    def __get_additional_payment_types(self):
+    @staticmethod
+    def __get_additional_payment_types():
         return {'credit': True, 'debit': True}
 
     def item_function(self, parent):

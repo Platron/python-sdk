@@ -106,6 +106,9 @@ class InitPaymentBuilder(RequestBuilder):
         """
         :param method: method which will be used to request merchant (string)
         """
+        if self.__get_request_method_variables().get(method) == None:
+            raise SdkException('Wrong request method. Use from constants')
+
         self.pg_request_method = method
 
     def add_success_url(self, url):
@@ -118,6 +121,9 @@ class InitPaymentBuilder(RequestBuilder):
         """
         :param method: method which will be used when send user on success url (string)
         """
+        if self.__get_redirect_method_variables().get(method) == None:
+            raise SdkException('Wrong method. Use from constants')
+
         self.pg_success_url_method = method
 
     def add_state_url(self, url):
@@ -130,6 +136,9 @@ class InitPaymentBuilder(RequestBuilder):
         """
         :param method: method which will be used when send user on state url (string)
         """
+        if self.__get_redirect_method_variables().get(method) == None:
+            raise SdkException('Wrong method. Use from constants')
+
         self.pg_state_url_method = method
 
     def add_failure_url(self, url):
@@ -142,6 +151,9 @@ class InitPaymentBuilder(RequestBuilder):
         """
         :param method: method which will be used when send user on failure url (string)
         """
+        if self.__get_redirect_method_variables().get(method) == None:
+            raise SdkException('Wrong method. Use from constants')
+
         self.pg_failure_url_method = method
 
     def add_site_url(self, url):
@@ -188,3 +200,11 @@ class InitPaymentBuilder(RequestBuilder):
                 raise SdkException('Only params without pg_')
 
             setattr(self, param_name, params.get(param_name))
+
+    @staticmethod
+    def __get_request_method_variables():
+        return {'GET': True, 'POST': True, 'XML': True}
+
+    @staticmethod
+    def __get_redirect_method_variables():
+        return {'GET': True, 'POST': True, 'AUTOGET': True, 'AUTOPOST': True}

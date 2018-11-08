@@ -10,6 +10,8 @@ class ItemTest(unittest.TestCase):
         data_object.add_vat('0')
         data_object.add_amount('180.00')
         data_object.add_type('product')
+        data_object.add_payment_type('full_payment')
+        data_object.add_agent('commissionaire', 'test agent', '123456789012', '79000000000')
 
         params = data_object.get_params()
 
@@ -19,6 +21,17 @@ class ItemTest(unittest.TestCase):
         self.assertEqual('0', params.get('pg_vat'))
         self.assertEqual('180.00', params.get('pg_amount'))
         self.assertEqual('product', params.get('pg_type'))
+        self.assertEqual('full_payment', params.get('pg_payment_type'))
+        self.assertEqual('commissionaire', params.get('pg_agent_type'))
+        self.assertEqual('test agent', params.get('pg_agent_name'))
+        self.assertEqual('123456789012', params.get('pg_agent_inn'))
+        self.assertEqual('79000000000', params.get('pg_agent_phone'))
 
         with self.assertRaises(SdkException):
             data_object.add_vat('wrong_vat')
+        with self.assertRaises(SdkException):
+            data_object.add_agent('wrong_agent_type', 'test agent', '123456789012', '79000000000')
+        with self.assertRaises(SdkException):
+            data_object.add_payment_type('wrong_payment_type')
+        with self.assertRaises(SdkException):
+            data_object.add_type('wrong_type')

@@ -12,10 +12,10 @@ class LongRecordTest(unittest.TestCase):
         data_object.set_agency_code('F')
         data_object.set_ticket_system('GAT')
 
-        triplegStub = Mock(spec=TripLeg)
-        triplegStub.get_params = MagicMock(return_value={'long_record_test': 'long_record_test'})
+        tripleg_stub = Mock(spec=TripLeg)
+        tripleg_stub.get_params = MagicMock(return_value={'long_record_test': 'long_record_test'})
 
-        data_object.add_tripleg(triplegStub)
+        data_object.add_tripleg(tripleg_stub)
 
         params = data_object.get_params()
 
