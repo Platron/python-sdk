@@ -17,7 +17,7 @@ class RecurringSetScheduleBuilder(RequestBuilder):
 
     def add_dates(self, dates):
         """
-        :param dates: Set of sting dates (Set)
+        :param dates: Set of sting dates (Dict)
         """
         if len(dates) == 0:
             raise SdkException('Use not empty Set')
