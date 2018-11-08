@@ -7,10 +7,8 @@ from platron.request.data_objects.bank_card import BankCard
 from platron.request.request_builders.init_payment_builder import InitPaymentBuilder
 from platron.sdk_exception import SdkException
 
-class InitPaymentBuiderTest(unittest.TestCase):
-    '''
-    Init payment builder test
-    '''
+
+class InitPaymentBuilderTest(unittest.TestCase):
 
     def test_get_params(self):
         builder = InitPaymentBuilder('10.00', 'test')
@@ -20,11 +18,11 @@ class InitPaymentBuiderTest(unittest.TestCase):
         builder.add_failure_url('www.site.ru/failure.php')
         builder.add_failure_url_method('POST')
         builder.add_lifetime('604800')
-        builder.add_merchant_params({'merchant_param' : 'test'})
+        builder.add_merchant_params({'merchant_param': 'test'})
         builder.add_order_id('555')
         builder.add_payment_system('RUSSIANSTANDARD')
         builder.add_postpone()
-        builder.add_ps_additional_parameters({'pg_alfaclick_client_id' : '111333'})
+        builder.add_ps_additional_parameters({'pg_alfaclick_client_id': '111333'})
         builder.add_recurring_start()
         builder.add_refund_url('www.site.ru/refund.php')
         builder.add_request_method('POST')
@@ -38,18 +36,18 @@ class InitPaymentBuiderTest(unittest.TestCase):
         builder.add_user_email('test@test.ru')
         builder.add_user_ip('62.213.64.221')
         builder.add_user_phone('79268750000')
-        
-        bankcardStub = Mock(spec=BankCard)
-        bankcardStub.get_params = MagicMock(return_value={'bank_card_test' : 'bank_card_test'})
-        
-        aviaGdsStub = Mock(spec=AviaGds)
-        aviaGdsStub.get_params = MagicMock(return_value={'gds_test' : 'gds_test'})
-        
-        builder.add_bankcard(bankcardStub)
-        builder.add_gds(aviaGdsStub)
-        
+
+        bankcard_stub = Mock(spec=BankCard)
+        bankcard_stub.get_params = MagicMock(return_value={'bank_card_test': 'bank_card_test'})
+
+        avia_gds_stub = Mock(spec=AviaGds)
+        avia_gds_stub.get_params = MagicMock(return_value={'gds_test': 'gds_test'})
+
+        builder.add_bankcard(bankcard_stub)
+        builder.add_gds(avia_gds_stub)
+
         parameters = builder.get_params()
-        
+
         self.assertEqual('www.site.ru/capture.php', parameters.get('pg_capture_url'))
         self.assertEqual('www.site.ru/check.php', parameters.get('pg_check_url'))
         self.assertEqual('RUB', parameters.get('pg_currency'))
@@ -74,15 +72,12 @@ class InitPaymentBuiderTest(unittest.TestCase):
         self.assertEqual('test@test.ru', parameters.get('pg_user_contact_email'))
         self.assertEqual('62.213.64.221', parameters.get('pg_user_ip'))
         self.assertEqual('79268750000', parameters.get('pg_user_phone'))
-        
+
         self.assertEqual('bank_card_test', parameters.get('bank_card_test'))
         self.assertEqual('gds_test', parameters.get('gds_test'))
 
         with self.assertRaises(SdkException):
-            builder.add_merchant_params({'pg_wrong_merchant_param' : 'test'})
-            
+            builder.add_merchant_params({'pg_wrong_merchant_param': 'test'})
+
         with self.assertRaises(SdkException):
-            builder.add_ps_additional_parameters({'wrong_ps_param' : 'test'})   
-        
-        
-        
+            builder.add_ps_additional_parameters({'wrong_ps_param': 'test'})

@@ -1,16 +1,13 @@
 from platron.request.request_builders.request_builder import RequestBuilder
 
+
 class GetMoneybackStatusBuilder(RequestBuilder):
-    '''
-    Get moneyback status API request
-    '''
 
     def __init__(self, moneyback):
         """
-        Args:
-            moneyback (string): platron moneyback id
+        :param moneyback: digital platron moneyback id (string)
         """
         self.pg_moneyback_id = moneyback
-        
+
     def get_url(self):
         return self.PLATRON_URL + 'get_moneyback_status.php'

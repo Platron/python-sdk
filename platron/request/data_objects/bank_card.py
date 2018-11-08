@@ -1,19 +1,17 @@
 from platron.request.data_objects.data_object import DataObject
 
+
 class BankCard(DataObject):
-    '''
-    Bank card data to send init_payment - only to merchants, whicj have PCI DSS
-    '''
 
     def __init__(self, card_number, card_holder_name, exp_year, exp_month, cvv, user_ip):
         """
         Args:
-            card_number (string): card number
-            card_holder_name (string): card holder name
-            exp_year (string): card expiration year
-            exp_month (string): card expiration month
-            cvv (string): card cvv
-            user_ip (string): user real ip
+            :param card_number: card number (string)
+            :param card_holder_name (string): card holder name (string)
+            :param exp_year: card expiration year (string)
+            :param exp_month: card expiration month (string)
+            :param cvv: card cvv (string)
+            :param user_ip: user real ip (string)
         """
         self.pg_card_number = card_number
         self.pg_user_cardholder = card_holder_name

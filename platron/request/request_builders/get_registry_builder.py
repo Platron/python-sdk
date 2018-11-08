@@ -1,14 +1,11 @@
 from platron.request.request_builders.request_builder import RequestBuilder
 
+
 class GetRegistryBuilder(RequestBuilder):
-    '''
-    Get status api request builder
-    '''
-    
+
     def __init__(self, date):
         """
-        Args:
-            date (string): date
+        :param date: date of registry (string)
         """
         self.pg_date = date
 
