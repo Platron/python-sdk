@@ -8,7 +8,7 @@ class RecurringSetScheduleBuilderTest(unittest.TestCase):
     def test_get_params(self):
         builder = RecurringSetScheduleBuilder('12345', '100')
         builder.add_template('2018-01-01', 'week', '10', '100')
-        builder.add_dates({'1': '2018-10-10', '2': '2019-10-10'})
+        builder.add_dates({'1': '10-10-2018', '2': '10-10-2019'})
 
         params = builder.get_params()
         template = params.get('pg_template')
@@ -19,7 +19,7 @@ class RecurringSetScheduleBuilderTest(unittest.TestCase):
         self.assertEquals('week', template.get('pg_interval'))
         self.assertEquals('10', template.get('pg_period'))
         self.assertEquals('100', template.get('pg_max_periods'))
-        self.assertEquals('2018-10-10', dates.get('1'));
+        self.assertEquals('10-10-2018', dates.get('1'));
 
         with self.assertRaises(SdkException):
             builder.add_template('2018-01-01', 'wrong_interval', '10', '100')
