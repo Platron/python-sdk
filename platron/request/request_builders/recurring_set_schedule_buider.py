@@ -1,5 +1,6 @@
 from platron.request.request_builders.request_builder import RequestBuilder
 from platron.sdk_exception import SdkException
+import re
 
 
 class RecurringSetScheduleBuilder(RequestBuilder):
@@ -37,6 +38,12 @@ class RecurringSetScheduleBuilder(RequestBuilder):
         self.pg_template = {'pg_start_date': start_date, 'pg_interval': interval, 'pg_period': period}
         if max_periods != None:
             self.pg_template.update({'pg_max_periods': max_periods})
+
+    def after_xml_created(self, xml):
+        without_middle_tags = re.sub(r'</n\d+><n\d+>', '</pg_dates><pg_dates>', xml)
+        without_start_tags = re.sub(r'<n\d+>', '', without_middle_tags)
+        without_end_tags = re.sub(r'</n\d+>', '', without_start_tags)
+        return without_end_tags
 
     @staticmethod
     def __get_intervals():
