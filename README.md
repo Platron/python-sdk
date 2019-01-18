@@ -93,7 +93,7 @@ from platron.sdk_exception import SdkException
 order_available = 1
 params_from_platron = {}
 
-callback = Callback('sdvsfdvsfdvsdv')
+callback = Callback('merchant_return_url_script', 'sdvsfdvsfdvsdv')
 if callback.validate_sig(params_from_platron) :
     if order_available:
         callback.response_ok(params_from_platron)
