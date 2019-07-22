@@ -17,7 +17,7 @@ class Item(DataObject):
 
     def add_vat(self, vat):
         """
-        :param vat: product vat 0|10|18|110|118 (string)
+        :param vat: product vat 0|10|20|110|120 (string)
         """
         if self.__get_vat_variables().get(vat) == None:
             raise SdkException('Wrong vat. Use from constants')
@@ -67,7 +67,7 @@ class Item(DataObject):
 
     @staticmethod
     def __get_vat_variables():
-        return {'0': True, '10': True, '18': True, '110': True, '118': True}
+        return {'0': True, '10': True, '20': True, '110': True, '120': True}
 
     @staticmethod
     def __get_type_variables():
