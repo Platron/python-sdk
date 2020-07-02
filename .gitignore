@@ -7,3 +7,4 @@ dist
 .pypirc
 .pytest_cache
 *.egg-info
+build/
