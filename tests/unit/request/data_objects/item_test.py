@@ -12,6 +12,7 @@ class ItemTest(unittest.TestCase):
         data_object.add_type('product')
         data_object.add_payment_type('full_payment')
         data_object.add_agent('commissionaire', 'test agent', '123456789012', '79000000000')
+        data_object.add_nomenclature_code('44h4Dh04h2Fh1Fh96h81h78h4Ah67h58h4Ah35h2Eh54h31h31h32h30h30h30h')
 
         params = data_object.get_params()
 
@@ -26,6 +27,7 @@ class ItemTest(unittest.TestCase):
         self.assertEqual('test agent', params.get('pg_agent_name'))
         self.assertEqual('123456789012', params.get('pg_agent_inn'))
         self.assertEqual('79000000000', params.get('pg_agent_phone'))
+        self.assertEqual('44h4Dh04h2Fh1Fh96h81h78h4Ah67h58h4Ah35h2Eh54h31h31h32h30h30h30h', params.get('pg_nomenclature_code'))
 
         with self.assertRaises(SdkException):
             data_object.add_vat('wrong_vat')

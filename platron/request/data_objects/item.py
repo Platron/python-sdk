@@ -41,6 +41,12 @@ class Item(DataObject):
 
         self.pg_type = item_type
 
+    def add_nomenclature_code(self, code):
+        """
+        :param code: product code from scan
+        """
+        self.pg_nomenclature_code = code
+
     def add_payment_type(self, payment_type):
         """
         :param payment_type: payment type (string)
