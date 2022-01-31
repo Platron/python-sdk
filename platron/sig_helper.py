@@ -26,14 +26,14 @@ class SigHelper(object):
                 continue
 
             name = parent_name + child.tag + "{:03d}".format(i)
-            if self.flat_xml_array.get(name) != None:
+            if self.flat_xml_array.get(name) is not None:
                 name = name + '_doubled'
 
-            if child.getchildren() != []:
+            if list(child):
                 self.__make_flat_params_xml(child, name)
                 continue
 
-            if child.text == None:
+            if child.text is None:
                 self.flat_xml_array.update({name: ''})
             else:
                 self.flat_xml_array.update({name: child.text})
